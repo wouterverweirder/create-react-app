@@ -207,6 +207,9 @@ module.exports = function(
     appPackage[key] = templatePackage[key];
   });
 
+  // Set the main script for the electron application
+  appPackage['main'] = 'electron/main.js';
+
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2) + os.EOL
@@ -310,6 +313,26 @@ module.exports = function(
     const proc = spawn.sync(command, args, { stdio: 'inherit' });
     if (proc.status !== 0) {
       console.error(`\`${command} ${args.join(' ')}\` failed`);
+      return;
+    }
+  }
+
+  // Install electron related devDependencies
+  {
+    console.log();
+    console.log(`Installing electron using ${command}...`);
+    let scopedArgs = [];
+    if (useYarn) {
+      scopedArgs = ['add', '--dev'];
+    } else {
+      scopedArgs = ['install', '--save-dev', verbose && '--verbose'].filter(e => e);
+    }
+    scopedArgs.push('electron');
+    scopedArgs.push('electron-builder');
+    scopedArgs.push('webpack-node-externals');
+    const proc = spawn.sync(command, scopedArgs, { stdio: 'inherit' });
+    if (proc.status !== 0) {
+      console.error(`\`${command} ${scopedArgs.join(' ')}\` failed`);
       return;
     }
   }

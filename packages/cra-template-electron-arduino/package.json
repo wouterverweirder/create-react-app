@@ -1,0 +1,29 @@
+{
+  "name": "cra-template-electron-arduino",
+  "version": "1.0.2",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "arduino",
+    "electron"
+  ],
+  "description": "The base template for Create React App, extended with electron and arduino support",
+  "main": "template.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wouterverweirder/create-react-app-electron-arduino.git",
+    "directory": "packages/cra-template"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bugs": {
+    "url": "https://github.com/wouterverweirder/create-react-app-electron-arduino/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ]
+}

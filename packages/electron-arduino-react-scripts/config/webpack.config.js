@@ -38,6 +38,8 @@ const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 const postcssNormalize = require('postcss-normalize');
 
+const nodeExternals = require('webpack-node-externals');
+
 const appPackageJson = require(paths.appPackageJson);
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -717,17 +719,19 @@ module.exports = function(webpackEnv) {
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
     node: {
-      module: 'empty',
-      dgram: 'empty',
-      dns: 'mock',
-      fs: 'empty',
-      http2: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty',
+      // module: 'empty',
+      // dgram: 'empty',
+      // dns: 'mock',
+      // fs: 'empty',
+      // http2: 'empty',
+      // net: 'empty',
+      // tls: 'empty',
+      // child_process: 'empty',
     },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
+    target: 'electron-renderer',
+    externals: [nodeExternals()],
   };
 };

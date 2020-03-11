@@ -1,0 +1,24 @@
+{
+  "package": {
+    "scripts": {
+      "start": "export BROWSER=none && react-scripts start",
+      "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+      "rebuild-deps": "electron-builder install-app-deps",
+      "build-electron": "mkdir build/src && cp -r electron/. build/electron",
+      "package": "electron-builder build --mac -c.extraMetadata.main=build/electron/main.js --publish never"
+    },
+    "dependencies": {
+      "@testing-library/react": "^9.3.2",
+      "@testing-library/jest-dom": "^4.2.4",
+      "@testing-library/user-event": "^7.1.2",
+      "johnny-five": "^1.4.0"
+    },
+    "homepage": "./",
+    "build": {
+      "files": [
+        "build/**/*",
+        "node_modules/**/*"
+      ]
+    }
+  }
+}
